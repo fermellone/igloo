@@ -1,7 +1,7 @@
 from flask import Flask, render_template, json, request
 from flask import render_template
 import sqlite3 as sql
-
+from flask import send_file
 app = Flask(__name__)
 
 
@@ -68,8 +68,18 @@ def exporesult():
 			
 			return render_template('exporesult.html',msg=documento)
 	
-    
+@app.route('/return-file/')
+def return_file():
+	return send_file('')
+@app.route('/file-downloads/')
+def file_downloads():
+	return render_template('exporesult.html')
+
+	
+
 
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
+
+
