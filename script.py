@@ -1,6 +1,7 @@
 import sqlite3 as sql
 import serial
 import time
+import csv
 
 arduino = serial.Serial('/dev/ttyACM0', 9600)
 
@@ -8,14 +9,14 @@ arduino = serial.Serial('/dev/ttyACM0', 9600)
 while True:
 	c = 0
 	suma_pulso = 0
-	while c < 6: 
+	while c < 21: 
 		pulso_ps = int(arduino.readline())
 		temperatura = float(arduino.readline())
 		suma_pulso = suma_pulso + pulso_ps
 		c = c + 1
-		time.sleep(1)
+		#time.sleep(1)
 	print("despues del while")
-	promedio_pulso = suma_pulso / 5
+	promedio_pulso = suma_pulso / 20
 	info =  [promedio_pulso, temperatura]
 	print(info)
 	with sql.connect("base_datos.db") as con: #Conectamos a la base de datos y lo llamamos "con"
