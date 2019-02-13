@@ -27,7 +27,13 @@ while True:
 								temperatura number
 								);'''
 							)
-			cursor.execute('''INSERT INTO dbsensores (pulso, temperatura) VALUES (?,?);''', info)
+			cursor.execute('''SELECT documento FROM dbauxiliar WHERE id = 1''')
+			insert_documento = cursor.fetchall()
+			insert_documento = str(insert_documento[0][0])
+			print(insert_documento)
+			info.append(insert_documento)
+			print(info)
+			cursor.execute('''INSERT INTO dbsensores (pulso, temperatura, documento) VALUES (?,?,?);''', info)
 			con.commit()
 		except Exception as e:
 			print(str(e))

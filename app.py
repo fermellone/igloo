@@ -33,15 +33,16 @@ def resultado():
 									Documento text
 									);'''
 								)
-				q ='''INSERT INTO dbauxiliar (Documento) VALUES (%s)''' % documento
-				cursor.execute(q)
 				cursor.execute('''INSERT INTO dbdatos (Nombre, Apellido, Documento) VALUES (?,?,?);''', datos)
+				q = '''UPDATE dbauxiliar SET documento=''' + documento
+				cursor.execute(q)
 				con.commit()
 				return render_template('resultado.html')
 		except Exception as e:
 			print(str(e))
 			return render_template('resultado.html')
 		finally:
+			con.close()
 			return render_template('resultado.html')
 
 
